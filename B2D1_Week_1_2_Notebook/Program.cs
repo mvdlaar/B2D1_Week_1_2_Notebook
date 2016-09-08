@@ -16,7 +16,7 @@ namespace B2D1_Week_1_2_Notebook
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new NotebookDemoForm());
         }
     }
 }
