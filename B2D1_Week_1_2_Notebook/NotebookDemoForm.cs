@@ -26,24 +26,36 @@ namespace B2D1_Week_1_2_Notebook
             Notebook newNotebook = new Notebook();
             notebooks.Add(newNotebook);
 
-            lbxNotebooks.Items.Add("Notebook " + notebooks.Count.ToString());
+            int notebookIndex = lbxNotebooks.Items.Add("Notebook " + notebooks.Count.ToString());
+
+            if (lbxNotebooks.SelectedIndex == -1)
+            {
+                lbxNotebooks.SelectedIndex = notebookIndex;
+            }
+
         }
 
         private void lbxNotebooks_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbxNotes.Items.Clear();
-            int i = 0;
-            while (i < notebooks[lbxNotebooks.SelectedIndex].NumberOfNotes())
+            if (lbxNotebooks.SelectedIndex != -1)
             {
-                lbxNotes.Items.Add(notebooks[lbxNotebooks.SelectedIndex].ShowNote(i));
-                i++;
+                int i = 0;
+                while (i < notebooks[lbxNotebooks.SelectedIndex].NumberOfNotes())
+                {
+                    lbxNotes.Items.Add(notebooks[lbxNotebooks.SelectedIndex].ShowNote(i));
+                    i++;
+                }
             }
         }
 
         private void btnAddNote_Click(object sender, EventArgs e)
         {
-            notebooks[lbxNotebooks.SelectedIndex].StoreNote(tbNewNote.Text);
-            lbxNotes.Items.Add(tbNewNote.Text);
+            if (lbxNotebooks.SelectedIndex != -1)
+            {
+                notebooks[lbxNotebooks.SelectedIndex].StoreNote(tbNewNote.Text);
+                lbxNotes.Items.Add(tbNewNote.Text);
+            }
         }
     }
 }
